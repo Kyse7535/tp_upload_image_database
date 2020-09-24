@@ -8,19 +8,20 @@ try {
                 $img = Ctl_image();
                 $titre = htmlspecialchars($_POST['titre']);
                 $comment = htmlentities($_POST['commentaire']);
-                $ok = Ctlinsertion($titre, $comment, $img, $base);
-                if ($ok == false) {
-                    throw new Exception("Erreur requete");
-                } else {
-                    header('Location: index.post.php');
-                }
+                Ctlinsertion($titre, $comment, $img, $base);
             } else {
                 header('Location: formulaire.php?msg=1');
+            }
+        } elseif ($_GET['action'] == "blog") {
+            $ok = CtlAffiche($GLOBALS['base']);
+            if ($ok == false) {
+                throw new Exception("Erreur requete");
+            } else {
             }
         }
     } else {
         CtlAccueil();
     }
 } catch (Exception $e) {
-    die('Erreur' . $e->getMessage());
+    die($e->getMessage());
 }

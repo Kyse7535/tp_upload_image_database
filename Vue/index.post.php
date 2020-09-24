@@ -9,7 +9,6 @@
 
 <body>
 
-    <?php require("script_image.php"); ?>
     <p>Aucune erreur dans le transfert du fichier.</p>
     <p>Le fichier X a été copié dans le repertoire photos.</p>
     <p>Ajout du commentaire réussi.</p>

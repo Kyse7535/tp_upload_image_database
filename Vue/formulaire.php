@@ -22,7 +22,7 @@
         <input type="submit" name="ok" value="Envoyer">
     </form>
 
-    <a href="index.php">page d'affichage du blog</a>
+    <a href="index.php?action=blog">page d'affichage du blog</a>
 </body>
 
 </html>

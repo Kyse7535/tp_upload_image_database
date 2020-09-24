@@ -15,3 +15,10 @@ function setComment($titre, $comment, $image, $base)
     $resultat->execute(array($titre, $comment, $image));
     return $resultat;
 }
+
+function getArticle($base)
+{
+    $sql = "SELECT * FROM tp1 WHERE Id_billet > 0 ORDER BY Id DESC LIMIT 1";
+    $resultat = $base->query($sql);
+    return $resultat->fetch();
+}

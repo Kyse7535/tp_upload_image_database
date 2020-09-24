@@ -8,10 +8,10 @@
 </head>
 
 <body>
-    <h1>Blog</h1>
-    <hr>
-    <h3>Bienvenue</h3>
-    <h3>Le 27/09/2011 00.00.00</h3>
+    <h1>Mon article</h1>
+    <?php
+
+    ?>
 </body>
 
 </html>

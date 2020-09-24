@@ -20,21 +20,16 @@ function Ctl_image()
         }
     } else {
         //s'il n'y a pas d'erreur alors $_FILES['nom_du_fichier']['error'] vaut 0
-        echo "Aucune erreur dans l'upload du fichier. <br>";
+        //echo "Aucune erreur dans l'upload du fichier. <br>";
         if ((isset($_FILES['photo']['name']) && ($_FILES['photo']['error'] == UPLOAD_ERR_OK))) {
 
-            $filename = $_FILES['photo']['name'];
+            $filename = basename($_FILES['photo']['name']);
             $tempname = $_FILES['photo']['tmp_name'];
-            $chemin_destination = "fichiers/";
-            if (!is_dir($chemin_destination)) {
-                mkdir($chemin_destination, 0777);
-            } else {
-                echo "le dossier existe";
-            }
+            $chemin_destination = "fichiers/" . $filename;
 
             //deplacement du fichier du repertoire temporaire (stocké par defaut) dans le rep de destination avec la fonction
-            if (move_uploaded_file($tempname, $chemin_destination . $filename)) {
-                echo "Le fichier " . $filename . " a ete copie dans le repertoire fichiers";
+            if (move_uploaded_file($tempname, $chemin_destination)) {
+                //echo "Le fichier " . $filename . " a ete copie dans le repertoire fichiers";
             }
             return $filename;
         } else {
@@ -50,5 +45,20 @@ function CtlAccueil()
 
 function Ctlinsertion($titre, $commentaire, $image, $base)
 {
-    setComment($titre, $commentaire, $image, $base);
+    $ok = setComment($titre, $commentaire, $image, $base);
+    if ($ok == false) {
+        throw new Exception("Erreur requete");
+    } else {
+        header('Location: Vue/index.post.php');
+    }
+}
+
+function CtlAffiche($base)
+{
+    $resultat = getArticle($base);
+    if ($resultat == false) {
+        throw new Exception("Erreur requete affichage");
+    } else {
+        require('./tp_upload_image_database/Vue/blog.php');
+    }
 }
